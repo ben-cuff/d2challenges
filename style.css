@@ -7,6 +7,18 @@ body {
     color: #333;
 }
 
+.title {
+    font-family: 'Arial', sans-serif;
+    text-align: left;
+    padding-left: 15px;
+    font-size: x-large;
+    color: #000000;
+    
+    /* Set the height of the title element */
+    line-height: 0px;
+    /* Set the line-height to be equal to the height */
+}
+
 /* Header styling */
 header {
     background-color: #007bff;
@@ -36,9 +48,23 @@ main {
     padding: 20px;
 }
 
+.navigation {
+    padding-left: 25px;
+    padding-top: 20px;
+    text-align: left;
+}
+
+a {
+    color: rgb(0, 0, 0);
+    display: inline-block;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
 p {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
