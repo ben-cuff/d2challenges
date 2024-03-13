@@ -18,10 +18,57 @@
             <a href="/games">Games</a>
         </div>
     </header>
+    <section class="home">
+        <h2>Welcome to D2Challenges!</h2>
+        <p>Explore our exciting challenges, track your progress, and play fun games.</p>
+        <form id="myForm">
+            <input id="myInput" type="text" placeholder="ExampleName#0000" />
+            <button type="submit">Search</button>
+        </form>
 
-    <main>
-        <p>Welcome to D2Challenges! Now KYS!!!</p>
-    </main>
+        <script>
+            document.getElementById('myForm').addEventListener('submit', function (event) {
+                // Prevent the form from being submitted normally
+                event.preventDefault();
+
+                // Get the value of the input field
+                var inputValue = document.getElementById('myInput').value;
+
+                // Now you can do whatever you want with inputValue
+                console.log(inputValue);
+                var name = "", numbers = "";
+                for (var i = 0; i < inputValue.length; i++) {
+                    if (inputValue[i] == "#") {
+                        name = inputValue.substring(0, i);
+                        numbers = inputValue.substring(i + 1, inputValue.length);
+                    }
+                }
+
+                console.log(name);
+                console.log(numbers);
+
+                var myHeaders = new Headers();
+myHeaders.append("Content-Type", "text/plain");
+myHeaders.append("X-API-Key", "de1f8d237c5148afafe513982223d5b6");
+
+var raw = "{\r\n  displayName: \"MrHandCuff\",\r\n  displayNameCode: 9945\r\n};\r\n";
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+            });
+        </script>
+
+
+    </section>
 </body>
 
 </html>
