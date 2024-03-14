@@ -26,13 +26,26 @@
             <button type="submit">Search</button>
         </form>
 
-        <script src="getBungieIDandAccountTypes.js"></script>
+        <script src="getMembershipInfo.js"></script>
         <script>
             document.getElementById('myForm').addEventListener('submit', function (event) {
                 event.preventDefault();
 
                 var inputValue = document.getElementById('myInput').value;
-                console.log(getBungieIDandAccountTypes(inputValue));
+
+                var membershipID = 0, membershipType = 0, displayName = "";
+                getMembershipInfo(inputValue)
+                    .then(i => {
+                        console.log(i);
+                        membershipID = i.membershipID;
+                        membershipType = i.membershipType;
+                        displayName = i.displayName;
+                    })
+                    .catch(error => {
+                        console.error(error); // This will log any errors that occur during the execution of the function
+                    });
+
+                    
             });
         </script>
 
