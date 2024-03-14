@@ -27,26 +27,27 @@
         </form>
 
         <script src="getMembershipInfo.js"></script>
+        <script src="getCharactersList.js"></script>
         <script>
-            document.getElementById('myForm').addEventListener('submit', function (event) {
-                event.preventDefault();
+            document.getElementById('myForm').addEventListener('submit', async function (event) {
+                    event.preventDefault();
 
-                var inputValue = document.getElementById('myInput').value;
+                    var inputValue = document.getElementById('myInput').value;
 
-                var membershipID = 0, membershipType = 0, displayName = "";
-                getMembershipInfo(inputValue)
-                    .then(i => {
+                    try {
+                        var i = await getMembershipInfo(inputValue);
+                        var displayName = i[0];
+                        var membershipID = i[1];
+                        var membershipType = i[2];
+
                         console.log(i);
-                        membershipID = i.membershipID;
-                        membershipType = i.membershipType;
-                        displayName = i.displayName;
-                    })
-                    .catch(error => {
-                        console.error(error); // This will log any errors that occur during the execution of the function
-                    });
 
-                    
-            });
+                        var j = await getCharactersList(membershipType, membershipID);
+                        console.log(j);
+                    } catch (error) {
+                        console.error(error); // This will log any errors that occur during the execution of the function
+                    }
+                });
         </script>
 
 

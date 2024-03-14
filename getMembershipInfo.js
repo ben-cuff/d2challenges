@@ -25,12 +25,8 @@ async function getMembershipInfo(inputValue) {
             }
             numbers = parseInt(numbers, 10).toString(); // Remove leading zeros
             break;
-        } 
+        }
     }
-
-
-
-
 
     var myHeaders = new Headers();
     myHeaders.append("Cookie", "bungled=2342621163030745343; bungledid=B21cCyjpVY9Gu3DIXh9NRdhMmHxy5kLcCAAA; bungleanon=sv=BAAAAACTdAAAAAAAAD0FEAAAAAAAAAAAAAAAAABMmHxy5kLcCEAAAAAQCe4+1/0tWVaRRdIn8i292BjWfyd/f0jwS8MjJ97Q+vPIpqLCDBS3w5xV+XOKkmndRRddcLuec2caZrQdSmLM&cl=MC4yOTg0My4xMDQ5OTE3; Q6dA7j3mn3WPBQVV61rt5CrQXv0q+I9ddZfGro+PognXQwjWM8bM6VGC=v1MN5Rgw__qCk; __cflb=0H28vP5GxS7vgVH4MZT6rB7QcDNQ8jpmQGDhrhbNzwu");
@@ -45,16 +41,16 @@ async function getMembershipInfo(inputValue) {
         body: raw,
         redirect: 'follow'
     };
-    var i = 0
+
+    var i = 0;
     while (true) {
         try {
             const response = await fetch(`https://www.bungie.net/Platform/User/Search/GlobalName/${i}/`, requestOptions);
             const json = await response.json();
-            console.log(json);
 
             for (let j = 0; j < json.Response.searchResults.length; j++) {
                 if (json.Response.searchResults[j].bungieGlobalDisplayNameCode == numbers) {
-                    console.log("Found!!!!");
+                    
                     let arr = [];
                     arr.push(json.Response.searchResults[j].bungieGlobalDisplayName);
                     arr.push(json.Response.searchResults[j].destinyMemberships[0].membershipId);
