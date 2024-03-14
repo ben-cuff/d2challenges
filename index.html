@@ -26,57 +26,16 @@
             <button type="submit">Search</button>
         </form>
 
+        <script src="getBungieIDandAccountTypes.js"></script>
         <script>
             document.getElementById('myForm').addEventListener('submit', function (event) {
                 event.preventDefault();
 
                 var inputValue = document.getElementById('myInput').value;
-                var name = "", numbers = "";
-                for (var i = 0; i < inputValue.length; i++) {
-                    if (inputValue[i] == "#") {
-                        name = inputValue.substring(0, i);
-                        numbers = inputValue.substring(i + 1, inputValue.length);
-                    }
-                }
-
-                var myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-                myHeaders.append("X-API-Key", "de1f8d237c5148afafe513982223d5b6");
-
-                var raw = JSON.stringify({
-                    displayName: name,
-                    displayNameCode: numbers
-                });
-
-                var requestOptions = {
-                    method: 'POST',
-                    headers: myHeaders,
-                    body: raw,
-                    redirect: 'follow'
-                };
-
-                fetch("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayerByBungieName/-1/", requestOptions)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data);
-                        var membershipId1 = data.Response[0].membershipId;
-
-                        var requestOptions = {
-                            method: 'GET',
-                            headers: myHeaders,
-                            redirect: 'follow'
-                        };
-
-                        return fetch("https://www.bungie.net/Platform/Destiny2/3/Profile/" + membershipId1 + "/?components=100", requestOptions);
-                    })
-                    .then(response => response.json())
-                    .then(data => {console.log(data);
-                        var characterIds = data.Response.profile.data.characterIds;
-                        console.log(characterIds);
-                    })
-                    .catch(error => console.log('error', error));
+                console.log(getBungieIDandAccountTypes(inputValue));
             });
         </script>
+
 
 
     </section>
